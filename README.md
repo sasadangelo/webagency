@@ -45,6 +45,6 @@ Open the browser and type ```www.mywebsite2.com```in the address bar.
 
 Currently, the code allows you simply to start a wordpress website in your local environment 
 
-# Known Problems
+## Known Problems
 
 TODO
