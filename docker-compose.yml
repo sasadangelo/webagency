@@ -1,0 +1,42 @@
+version: '2'
+
+volumes:
+    mysql_volume:
+    wordpress_volume:
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql
+    volumes:
+      - mysql_volume:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=wpuser
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=wpdb
+
+  wordpress:
+    container_name: wordpress
+    image: wordpress
+    ports:
+      - 8080:80
+    volumes:
+      - wordpress_volume:/var/www/html
+    links:
+      - mysql:mysql
+    environment:
+      - VIRTUAL_HOST=www.mywebsite2.com
+      - WORDPRESS_DB_USER=wpuser
+      - WORDPRESS_DB_PASSWORD=password
+      - WORDPRESS_DB_NAME=wpdb
+
+  nginx-proxy:
+    container_name: nginx-proxy
+    image: jwilder/nginx-proxy:alpine
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    environment:
+      - DEFAULT_HOST=www.mywebsite2.com
