@@ -11,10 +11,10 @@ services:
     volumes:
       - mysql_volume:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_USER=wpuser
-      - MYSQL_PASSWORD=password
-      - MYSQL_DATABASE=wpdb
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
 
   wordpress:
     container_name: wordpress
@@ -26,10 +26,10 @@ services:
     links:
       - mysql:mysql
     environment:
-      - VIRTUAL_HOST=www.mywebsite2.com
-      - WORDPRESS_DB_USER=wpuser
-      - WORDPRESS_DB_PASSWORD=password
-      - WORDPRESS_DB_NAME=wpdb
+      - VIRTUAL_HOST=${VIRTUAL_HOST}
+      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
 
   nginx-proxy:
     container_name: nginx-proxy
@@ -39,4 +39,4 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     environment:
-      - DEFAULT_HOST=www.mywebsite2.com
+      - DEFAULT_HOST=${VIRTUAL_HOST}
