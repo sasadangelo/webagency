@@ -11,21 +11,26 @@ TODO
 Open the ```.env``` file and customize the following values:
 
 ```
-# MySQL environment variables
+# Docker MySQL environment variables
 MYSQL_ROOT_PASSWORD=password
 MYSQL_USER=wpuser
 MYSQL_PASSWORD=password
 MYSQL_DATABASE=wpdb
 
-# Wordpress environment variables
+# Docker Wordpress environment variables
 VIRTUAL_HOST=www.mywebsite2.com
 WORDPRESS_DB_USER=wpuser
 WORDPRESS_DB_PASSWORD=password
 WORDPRESS_DB_NAME=wpdb
 
+# Wordpress CLI environment variables 
+WORDPRESS_TITLE="MyWebsite"
+WORDPRESS_USER="admin"
+WORDPRESS_PASSWD="password"
+WORDPRESS_USER_EMAIL="info@mywebsite2.com"
+
 # Nginx environment variables
-DEFAULT_HOST=www.mywebsite2.com
-```
+DEFAULT_HOST=www.mywebsite2.com```
 
 Run the following command to startup your wordpress stack:
 
