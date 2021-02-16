@@ -30,7 +30,8 @@ WORDPRESS_PASSWD="password"
 WORDPRESS_USER_EMAIL="info@mywebsite2.com"
 
 # Nginx environment variables
-DEFAULT_HOST=www.mywebsite2.com```
+DEFAULT_HOST=www.mywebsite2.com
+```
 
 Run the following command to startup your wordpress stack:
 
