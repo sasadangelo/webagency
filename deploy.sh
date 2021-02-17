@@ -10,3 +10,6 @@ docker run -d --name nginx -p 80:80 -e DEFAULT_HOST=www.mywebsite2.com -v /var/r
 #docker run -d --name nginx -p 80:80 -p 443:443 -e ENABLE_IPV6=true -e DEFAULT_HOST=www.mywebsite2.com -e VIRTUAL_PROTO=uwsgi -v /Users/sasadangelo/mywebsite/nginx/htpasswd:/etc/nginx/htpasswd -v /Users/sasadangelo/mywebsite/nginx/conf.d:/etc/nginx/conf.d:ro -v /Users/sasadangelo/mywebsite/nginx/certs:/etc/nginx/certs -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy:alpine
 
 #docker run -d --name nginx -p 80:80 -e DEFAULT_HOST=www.mywebsite2.com -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy:alpine
+
+
+docker run -it --rm --link mysql:mysql -v webagency_wordpress_volume:/var/www/html --net webagency_default wordpress:cli /bin/bash

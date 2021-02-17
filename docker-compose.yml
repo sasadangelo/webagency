@@ -74,9 +74,14 @@ services:
           condition: service_healthy
     container_name: wordpress-cli
     image: wordpress:cli
+    user: xfs
     volumes:
       - wordpress_volume:/var/www/html
     links:
       - mysql:mysql
-    entrypoint: wp
-    command: "core install --url=\"$VIRTUAL_HOST\" --title=\"$WORDPRESS_TITLE\" --admin_user=\"$WORDPRESS_USER\" --admin_password=\"$WORDPRESS_PASSWD\" --admin_email=\"$WORDPRESS_USER_EMAIL\""
+    #entrypoint: wp
+    command: >
+      /bin/bash -c "
+        wp core install --url=\"$VIRTUAL_HOST\" --title=\"$WORDPRESS_TITLE\" --admin_user=\"$WORDPRESS_USER\" --admin_password=\"$WORDPRESS_PASSWD\" --admin_email=\"$WORDPRESS_USER_EMAIL\"; 
+        wp plugin delete hello akismet 
+        "
