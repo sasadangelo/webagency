@@ -47,6 +47,14 @@ Add the following line to your ```/etc/hosts``` file.
 
 Open the browser and type ```www.mywebsite2.com```in the address bar.
 
+Run the following command if you want to destroy your conatiners:
+
+```
+docker-compose down [-v]
+```
+
+The -v option remove all the volumes created.
+
 ## Limitations
 
 Currently, the code allows you simply to start a wordpress website in your local environment 
