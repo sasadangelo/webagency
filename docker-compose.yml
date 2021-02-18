@@ -77,12 +77,8 @@ services:
     user: xfs
     volumes:
       - wordpress_volume:/var/www/html
+      - ./configure_wp.sh:/configure_wp.sh
+      - ./.env:/.env
     links:
       - mysql:mysql
-    #entrypoint: wp
-    command: >
-      /bin/bash -c "
-        wp core install --url=\"$VIRTUAL_HOST\" --title=\"$WORDPRESS_TITLE\" --admin_user=\"$WORDPRESS_USER\" --admin_password=\"$WORDPRESS_PASSWD\" --admin_email=\"$WORDPRESS_USER_EMAIL\"; 
-        wp plugin delete hello akismet;
-        wp theme delete twentynineteen twentytwenty
-        "
+    command: "/configure_wp.sh" 
