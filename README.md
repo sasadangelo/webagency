@@ -24,14 +24,17 @@ WORDPRESS_DB_PASSWORD=password
 WORDPRESS_DB_NAME=wpdb
 
 # Wordpress CLI environment variables 
-WORDPRESS_TITLE="MyWebsite"
-WORDPRESS_USER="admin"
-WORDPRESS_PASSWD="password"
-WORDPRESS_USER_EMAIL="info@mywebsite2.com"
+WORDPRESS_TITLE=MyWebsite
+WORDPRESS_USER=admin
+WORDPRESS_PASSWD=password
+WORDPRESS_USER_EMAIL=info@mywebsite2.com
+
+# Wordpress plugins and theme to install
+WORDPRESS_PLUGINS="antispam-bee better-font-awesome contact-form-7 cookie-law-info php-code-widget re-add-underline-justify custom-css-js social-media-widget w3-total-cache widget-logic wordpress-seo wp-google-maps"
+WORDPRESS_THEME=vantage
 
 # Nginx environment variables
-DEFAULT_HOST=www.mywebsite2.com
-```
+DEFAULT_HOST=www.mywebsite2.com```
 
 Run the following command to startup your wordpress stack:
 
