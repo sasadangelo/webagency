@@ -2,7 +2,9 @@ version: '2.1'
 
 volumes:
     mysql_volume:
+      name: mysql_volume
     wordpress_volume:
+      name: wordpress_volume
 
 services:
   mysql:
@@ -21,6 +23,8 @@ services:
       timeout: 20s
       retries: 10
     restart: always
+    networks:
+      - webagency-net
 
   wordpress:
     depends_on:
@@ -34,16 +38,24 @@ services:
     links:
       - mysql:mysql
     environment:
-      - VIRTUAL_HOST=${VIRTUAL_HOST}
-      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
-      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
-      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+      WORDPRESS_CONFIG_EXTRA: |
+        #define('FS_METHOD', 'direct');
+        #define('WP_MEMORY_LIMIT', '3000M');
+        #define('WP_DEBUG', 'true');
+        #define('WP_HTTP_BLOCK_EXTERNAL', false);
+        #define('WP_ACCESSIBLE_HOSTS', 'api.wordpress.org');
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80"]
       interval: 30s
       timeout: 10s
       retries: 5
     restart: always
+    networks:
+      - webagency-net
 
   nginx-proxy:
     depends_on:
@@ -62,6 +74,8 @@ services:
       timeout: 10s
       retries: 5
     restart: always
+    networks:
+      - webagency-net
 
 
   wordpress-cli:
@@ -75,10 +89,21 @@ services:
     container_name: wordpress-cli
     image: wordpress:cli
     user: xfs
+    environment:
+      - HOME=/tmp
     volumes:
       - wordpress_volume:/var/www/html
       - ./configure_wp.sh:/configure_wp.sh
       - ./.env:/.env
     links:
       - mysql:mysql
-    command: "/configure_wp.sh" 
+    command: "/configure_wp.sh"
+    dns:
+      - 8.8.8.8
+    networks:
+      - webagency-net
+
+networks:
+  webagency-net:
+    name: webagency-net
+    driver: bridge
