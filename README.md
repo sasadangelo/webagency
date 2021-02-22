@@ -1,6 +1,10 @@
 # Web Agency
 
-This is a proof of concept to create a software system to host Wordpress websites. The system leverage on Docker and Wordpress to host easily new Wordpress websites with very few commands.
+This is a project for educational purpose and a proof of concept to create a WordPress hosting system based on Docker and Kubernetes. The system leverage on Docker, MySQL and Wordpress to easily create a website just configuring a configuration file and running a single command. 
+
+As a first step, I will try to create on a single machine multiple website using Docker and the official images of WordPress, WordPress Cli, MySQL, and NgInx-Proxy. The latter image will be used to access to the websites on the 80 port and specifying a different domain for each website.
+
+In a next step, I will add Kubernetes to host on multiple node and managing high availability scenarios. A monitor system will be implemented to monitor the nodes and scale up and down the system. A backup container will be available to manage disaster recovery scenarios.
 
 ## Architecture
 
