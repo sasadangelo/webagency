@@ -1,0 +1,20 @@
+{
+  "facebook_site": "",
+  "instagram_url": "",
+  "linkedin_url": "",
+  "myspace_url": "",
+  "og_default_image": "",
+  "og_default_image_id": "",
+  "og_frontpage_title": "",
+  "og_frontpage_desc": "",
+  "og_frontpage_image": "",
+  "og_frontpage_image_id": "",
+  "opengraph": true,
+  "pinterest_url": "",
+  "pinterestverify": "",
+  "twitter": true,
+  "twitter_site": "",
+  "twitter_card_type": "summary_large_image",
+  "youtube_url": "",
+  "wikipedia_url": ""
+}
