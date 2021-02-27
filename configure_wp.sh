@@ -42,16 +42,16 @@ configure_wp_settings() {
 configure_wp_plugins() {
     if [ "$SCRIPT_DIR" == "/" ]
     then
-        PLUGINS_SETTINGS_DIR="/plugins_settings"
+        OPTIONS_PLUGINS_DIR="/options/plugins"
     else
-        PLUGINS_SETTINGS_DIR="$SCRIPT_DIR/plugins_settings"
+        OPTIONS_PLUGINS_DIR="$SCRIPT_DIR/options/plugins"
     fi
-    PLUGINS=$(ls $PLUGINS_SETTINGS_DIR)
+    PLUGINS=$(ls $OPTIONS_PLUGINS_DIR)
     for plugin in "$PLUGINS"; do
         echo "Import options for the plugin $plugin"
-        OPTIONS=$(ls /plugins_settings/$plugin)
+        OPTIONS=$(ls $OPTIONS_PLUGINS_DIR/$plugin)
         for option in $OPTIONS; do
-            wp option update $option < $PLUGINS_SETTINGS_DIR/$plugin/$option
+            wp option update $option --format=json < $OPTIONS_PLUGINS_DIR/$plugin/$option
         done
     done
 }
