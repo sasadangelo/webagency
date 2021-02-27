@@ -8,7 +8,7 @@ wp() {
 export -f wp
 
 # Wordpress SEO options
-declare -a options=("wpseo" "wpseo_flush_rewrite" "wpseo_ryte" "wpseo_social" "wpseo_titles")
+declare -a options=("wpseo" "wpseo_flush_rewrite" "wpseo_ryte" "wpseo_social" "wpseo_titles" "yoast_migrations_free")
 
 ###################################################################
 # Main block
