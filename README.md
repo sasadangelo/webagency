@@ -12,6 +12,14 @@ TODO
 
 ## How to use it
 
+Prepare the environment with these commands:
+
+```
+wget https://github.com/sasadangelo/webagency/releases/download/1.0.0/webagency-1.0.0.tar.gz
+tar xzvf webagency-1.0.0.tar.gz
+cd webagency
+```
+
 Open the ```.env``` file and customize the following values:
 
 ```
