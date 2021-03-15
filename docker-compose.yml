@@ -9,7 +9,7 @@ volumes:
 services:
   mysql:
     container_name: mysql
-    image: mysql
+    image: mysql:${MYSQL_VERSION:-latest}
     volumes:
       - mysql_volume:/var/lib/mysql
     environment:
@@ -30,7 +30,7 @@ services:
     depends_on:
       - mysql
     container_name: wordpress
-    image: wordpress
+    image: wordpress:${WORDPRESS_VERSION:-latest}
     ports:
       - 8080:80
     volumes:
@@ -87,7 +87,7 @@ services:
       nginx-proxy:
           condition: service_healthy
     container_name: wordpress-cli
-    image: wordpress:cli
+    image: wordpress:cli-${WORDPRESS_CLI_VERSION}
     user: xfs
     environment:
       - HOME=/tmp
