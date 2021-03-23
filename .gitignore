@@ -1,1 +1,3 @@
 .myenv
+certs/mywebsite2.com.crt
+certs/mywebsite2.com.key

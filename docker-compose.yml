@@ -29,6 +29,7 @@ services:
   wordpress:
     depends_on:
       - mysql
+      - nginx-proxy
     container_name: wordpress
     image: wordpress:${WORDPRESS_VERSION:-latest}
     ports:
@@ -44,7 +45,7 @@ services:
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
       WORDPRESS_CONFIG_EXTRA: |
         #define('FS_METHOD', 'direct');
-        #define('WP_MEMORY_LIMIT', '3000M');
+        define('WP_MEMORY_LIMIT', '3M');
         #define('WP_DEBUG', 'true');
         #define('WP_HTTP_BLOCK_EXTERNAL', false);
         #define('WP_ACCESSIBLE_HOSTS', 'api.wordpress.org');
@@ -58,16 +59,17 @@ services:
       - webagency-net
 
   nginx-proxy:
-    depends_on:
-      - wordpress
     container_name: nginx-proxy
     image: jwilder/nginx-proxy:alpine
     ports:
       - 80:80
+      - 443:443
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certs:/etc/nginx/certs
     environment:
       - DEFAULT_HOST=${VIRTUAL_HOST}
+      - VIRTUAL_PROTO=uwsgi
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80"]
       interval: 30s
